@@ -99,8 +99,10 @@ const spawnEnemies = () => {
   }, 1000)
 }
 
+let animationId
+
 const animate = () => {
-  requestAnimationFrame(animate)
+  animationId = requestAnimationFrame(animate)
 
   c.clearRect(0, 0, canvas.width, canvas.height)
   player.draw()
@@ -111,6 +113,12 @@ const animate = () => {
 
   enemies.forEach((enemy, index) => {
     enemy.update()
+
+    const distance = Math.hypot(player.x - enemy.x, player.y - enemy.y)
+
+    if (distance - enemy.radius - player.radius < 1) {
+      cancelAnimationFrame(animationId)
+    }
 
     projectiles.forEach((projectile, projectileIndex) => {
       const distance = Math.hypot(

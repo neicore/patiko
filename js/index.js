@@ -109,8 +109,22 @@ const animate = () => {
     projectile.update()
   })
 
-  enemies.forEach((enemy) => {
+  enemies.forEach((enemy, index) => {
     enemy.update()
+
+    projectiles.forEach((projectile, projectileIndex) => {
+      const distance = Math.hypot(
+        projectile.x - enemy.x,
+        projectile.y - enemy.y
+      )
+
+      if (distance - enemy.radius - projectile.radius < 1) {
+        setTimeout(() => {
+          enemies.splice(index, 1)
+          projectiles.splice(projectileIndex, 1)
+        }, 0)
+      }
+    })
   })
 }
 

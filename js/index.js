@@ -76,6 +76,7 @@ const enemies = []
 const spawnEnemies = () => {
   setInterval(() => {
     const radius = Math.random() * (30 - 5) + 5
+
     let x
     let y
 
@@ -110,6 +111,7 @@ const animate = () => {
   projectiles.forEach((projectile, index) => {
     projectile.update()
 
+    //   Clear projectiles when they reach the edge of the screen
     if (
       projectile.x + projectile.radius < 0 ||
       projectile.x - projectile.radius > canvas.width ||
@@ -125,6 +127,7 @@ const animate = () => {
   enemies.forEach((enemy, index) => {
     enemy.update()
 
+    //   End game
     const distance = Math.hypot(player.x - enemy.x, player.y - enemy.y)
 
     if (distance - enemy.radius - player.radius < 1) {
@@ -132,16 +135,26 @@ const animate = () => {
     }
 
     projectiles.forEach((projectile, projectileIndex) => {
+      // Enemy vs projectile collision
       const distance = Math.hypot(
         projectile.x - enemy.x,
         projectile.y - enemy.y
       )
 
       if (distance - enemy.radius - projectile.radius < 1) {
-        setTimeout(() => {
-          enemies.splice(index, 1)
-          projectiles.splice(projectileIndex, 1)
-        }, 0)
+        console.log(enemy.radius)
+        if (enemy.radius - 10 > 10) {
+          enemy.radius -= 10
+
+          setTimeout(() => {
+            projectiles.splice(projectileIndex, 1)
+          }, 0)
+        } else {
+          setTimeout(() => {
+            enemies.splice(index, 1)
+            projectiles.splice(projectileIndex, 1)
+          }, 0)
+        }
       }
     })
   })

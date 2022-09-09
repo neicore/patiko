@@ -1,4 +1,6 @@
-class Player {
+import { c } from './consts'
+
+export class Player {
   constructor(x, y, radius, color) {
     this.x = x
     this.y = y
@@ -14,7 +16,7 @@ class Player {
   }
 }
 
-class Projectile {
+export class Projectile {
   constructor(x, y, radius, color, velocity) {
     this.x = x
     this.y = y
@@ -37,7 +39,7 @@ class Projectile {
   }
 }
 
-class Enemy {
+export class Enemy {
   constructor(x, y, radius, color, velocity) {
     this.x = x
     this.y = y
@@ -60,7 +62,7 @@ class Enemy {
   }
 }
 
-class Particle {
+export class Particle {
   constructor(x, y, radius, color, velocity) {
     this.x = x
     this.y = y

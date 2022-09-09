@@ -1,5 +1,6 @@
-const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
+import { Player, Projectile, Enemy, Particle } from './objects'
+import { canvas, c } from './consts'
+import gsap from 'gsap'
 
 canvas.width = innerWidth
 canvas.height = innerHeight
@@ -17,14 +18,6 @@ let player = new Player(centerX, centerY, 20, 'white')
 let projectiles = []
 let enemies = []
 let particles = []
-
-const newGame = () => {
-  player = new Player(centerX, centerY, 20, 'white')
-  projectiles = []
-  enemies = []
-  particles = []
-  score = 0
-}
 
 const spawnEnemies = () => {
   setInterval(() => {

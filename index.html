@@ -18,10 +18,23 @@
         height: 100vh;
         overflow: hidden;
       }
+
+      .score {
+        color: white;
+        position: fixed;
+        left: 2%;
+        top: 2%;
+        user-select: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+      }
     </style>
   </head>
 
   <body>
+    <p class="score">Score: <span id="score"></span></p>
     <canvas></canvas>
   </body>
 

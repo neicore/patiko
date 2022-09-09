@@ -5,6 +5,10 @@ canvas.width = innerWidth
 canvas.height = innerHeight
 
 const scoreUI = document.getElementById('score')
+const scoreParagraph = document.querySelector('.score')
+const gameOverUI = document.getElementById('game_over')
+const finalScoreUI = document.getElementById('final_score')
+const restartButton = document.getElementById('restart')
 
 class Player {
   constructor(x, y, radius, color) {
@@ -103,10 +107,18 @@ class Particle {
 const centerX = canvas.width / 2
 const centerY = canvas.height / 2
 
-const player = new Player(centerX, centerY, 20, 'white')
-const projectiles = []
-const enemies = []
-const particles = []
+let player = new Player(centerX, centerY, 20, 'white')
+let projectiles = []
+let enemies = []
+let particles = []
+
+const newGame = () => {
+  player = new Player(centerX, centerY, 20, 'white')
+  projectiles = []
+  enemies = []
+  particles = []
+  score = 0
+}
 
 const spawnEnemies = () => {
   setInterval(() => {
@@ -177,6 +189,9 @@ const animate = () => {
 
     if (distance - enemy.radius - player.radius < 1) {
       cancelAnimationFrame(animationId)
+      finalScoreUI.textContent = score
+      gameOverUI.style.display = 'block'
+      scoreParagraph.style.display = 'none'
     }
 
     // Enemy vs projectile collision
@@ -243,3 +258,12 @@ addEventListener('click', (e) => {
 
 animate()
 spawnEnemies()
+
+restartButton.addEventListener('click', () => {
+  newGame()
+  animate()
+  spawnEnemies()
+  gameOverUI.style.display = 'none'
+  scoreParagraph.style.display = 'block'
+  scoreUI.textContent = score
+})

@@ -30,11 +30,47 @@
         -moz-user-select: none;
         -ms-user-select: none;
       }
+
+      .game_over {
+        position: absolute;
+        background-color: white;
+        color: black;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        padding: 30px;
+        text-align: center;
+        border-radius: 7px;
+        display: none;
+      }
+
+      #restart {
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px 0;
+        border-radius: 5px;
+        background-color: #ff339f;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
     </style>
   </head>
 
   <body>
     <p class="score">Score: <span id="score"></span></p>
+
+    <div class="game_over" id="game_over">
+      <h2>Game over!</h2>
+      <small>Your score</small>
+      <h2 id="final_score"></h2>
+      <button id="restart">Play again</button>
+    </div>
+
     <canvas></canvas>
   </body>
 
